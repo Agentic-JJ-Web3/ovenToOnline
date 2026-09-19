@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brown: #5c3418;
+  --color-brown-d: #4a2a13;
+  --color-caramel: #c47a2c;
+  --color-gold: #e2b87c;
+  --color-cream: #fbf5ec;
+  --color-sand: #f2e6d4;
+  --color-ink: #2b2118;
+  --color-muted: #8a7a6a;
+  --color-green: #3f6b3a;
+  --color-red: #a8402f;
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans), sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), serif;
+  letter-spacing: -0.01em;
+}
+
+.kicker {
+  font-family: var(--font-sans), sans-serif;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  font-weight: 600;
+}
+
+/* Faint flour-speckle texture for cream sections — CSS only, no images. */
+.flour-speckle {
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(92, 52, 24, 0.05) 0, rgba(92, 52, 24, 0.05) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 78% 65%, rgba(92, 52, 24, 0.04) 0, rgba(92, 52, 24, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 45% 85%, rgba(92, 52, 24, 0.045) 0, rgba(92, 52, 24, 0.045) 1.2px, transparent 1.2px),
+    radial-gradient(circle at 90% 15%, rgba(92, 52, 24, 0.04) 0, rgba(92, 52, 24, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 30% 50%, rgba(92, 52, 24, 0.035) 0, rgba(92, 52, 24, 0.035) 1px, transparent 1px);
+  background-size: 180px 180px, 220px 220px, 260px 260px, 200px 200px, 240px 240px;
+}
+
+.warm-shadow {
+  box-shadow: 0 8px 24px rgba(92, 52, 24, 0.18);
+}
+
+.warm-shadow-sm {
+  box-shadow: 0 4px 12px rgba(92, 52, 24, 0.14);
+}
