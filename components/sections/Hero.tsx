@@ -1,23 +1,19 @@
+import Image from "next/image";
 import { Mark } from "@/components/Mark";
 import { Counter } from "@/components/Counter";
 import { BuyButton } from "@/components/BuyButton";
 
-// TODO: replace the placeholder book card below with an <img> of
-// public/brand/cover.png once supplied (claude.md §7.5).
 function BookMockup() {
   return (
-    <div className="warm-shadow mx-auto flex aspect-[707/1000] w-full max-w-[280px] flex-col justify-between rounded-lg border border-gold/30 bg-gradient-to-br from-brownD to-brown p-6">
-      <p className="kicker text-gold">A workbook for pastry sellers</p>
-      <div>
-        <p className="font-display text-3xl font-semibold leading-tight text-cream">
-          From Oven
-          <br />
-          to <span className="text-gold">Online</span>
-        </p>
-        <p className="mt-4 text-xs text-sand/80">
-          85 pages · 8 sections · The Script Pack included
-        </p>
-      </div>
+    <div className="warm-shadow mx-auto w-full max-w-[280px] overflow-hidden rounded-lg border border-gold/30">
+      <Image
+        src="/brand/cover.png"
+        alt="From Oven to Online — masterclass workbook cover"
+        width={1080}
+        height={1350}
+        priority
+        className="h-auto w-full"
+      />
     </div>
   );
 }
