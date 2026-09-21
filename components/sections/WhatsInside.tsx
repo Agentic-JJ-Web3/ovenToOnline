@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const SECTIONS = [
   { n: "01", title: "Costing that tells the truth", body: "Price every bake so your time is paid, not just your ingredients." },
   { n: "02", title: "Your first 50 customers", body: "They're already in your phone. This section shows you how to reach them." },
@@ -9,12 +11,17 @@ const SECTIONS = [
   { n: "08", title: "Your 30-day plan", body: "What to do, in order, starting tomorrow." },
 ];
 
-// TODO: swap these placeholder tiles for real crops of post2_costing.png,
-// post3_excuses.png and post4_ten_videos.png once supplied (claude.md §7.5).
-function PagePreview({ label }: { label: string }) {
+function PagePreview({ src, label }: { src: string; label: string }) {
   return (
-    <div className="warm-shadow-sm flex aspect-[4/5] flex-col justify-end rounded-lg bg-sand p-4">
-      <p className="font-display text-sm font-semibold text-ink/70">{label}</p>
+    <div className="warm-shadow-sm overflow-hidden rounded-lg">
+      <Image
+        src={src}
+        alt={label}
+        width={1080}
+        height={1350}
+        loading="lazy"
+        className="h-auto w-full"
+      />
     </div>
   );
 }
@@ -49,9 +56,9 @@ export function WhatsInside() {
         </p>
 
         <div className="mt-10 grid grid-cols-3 gap-4">
-          <PagePreview label="Page 21 — costing" />
-          <PagePreview label="Page 44 — excuses" />
-          <PagePreview label="Page 58 — ten videos" />
+          <PagePreview src="/brand/post3_excuses.png" label="Page 8 — the excuse list" />
+          <PagePreview src="/brand/post2_costing.png" label="Page 19 — the costing worked example" />
+          <PagePreview src="/brand/post4_ten_videos.png" label="Page 29 — ten videos, one batch" />
         </div>
       </div>
     </section>
