@@ -1,15 +1,17 @@
+// Verbatim from The_Script_Pack_COPY_PASTE.txt — brackets are exactly how
+// they ship, so buyers see what they're actually getting.
 const SAMPLE_SCRIPTS = [
   {
-    label: "When someone asks the price",
-    body: "This one is 6,500 FCFA — that covers the ingredients, the packaging and the time it takes to make it look this good. I can have it ready by Saturday if you order today.",
+    label: `"How much?"`,
+    body: "Hi [name]! Thanks for reaching out 😊 Here's the full price list 👇 [send image]\n[Product] is [price] each, minimum [X]. Delivery within [city] is from [amount] FCFA.\nWhat date do you need them for?",
   },
   {
-    label: "Following up after they go quiet",
-    body: "Hi! Just checking in — are you still thinking about the order, or should I hold Saturday for someone else? No wahala either way, just let me know.",
+    label: `"Reduce am small"`,
+    body: "I understand, [name]. I keep my prices fair for the quality of ingredients and packaging, so I can't reduce this one. But if your budget is tighter, the [6-piece box at 4,200] might work well. Would that be helpful?",
   },
   {
-    label: "Asking for a repeat order",
-    body: "It's been a month since your last order — due for a restock? I have a new flavour this week if you want to try something different.",
+    label: "Confirming payment received",
+    body: "Received, thank you! ✅ [Amount] confirmed. Your [24 meat pies] are booked for [Thursday, 11am], delivery to [address]. I'll message you when they're out of the oven.",
   },
 ];
 
@@ -31,7 +33,7 @@ export function Bonus() {
           {SAMPLE_SCRIPTS.map((s) => (
             <div key={s.label} className="warm-shadow-sm rounded-xl bg-white p-6">
               <p className="kicker text-caramel">{s.label}</p>
-              <p className="mt-3 text-[14px] italic leading-relaxed text-ink/80">
+              <p className="mt-3 whitespace-pre-line text-[14px] italic leading-relaxed text-ink/80">
                 &ldquo;{s.body}&rdquo;
               </p>
             </div>
