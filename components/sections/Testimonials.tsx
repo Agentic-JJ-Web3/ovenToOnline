@@ -31,12 +31,12 @@ export const TESTIMONIALS: Testimonial[] = [
     photoUrl: "/brand/testimonials/ebai-doris.jpg",
   },
   {
-    id: "ebai-doris",
-    name: "Ebai Doris",
-    location: "Buea",
+    id: "mba-destiny",
+    name: "Mba Destiny",
+    location: "Limbe",
     quote:
-      "She has been in this business for over 7 years, but her mid has never been open for expansions. Thanks to the workbook, she had a blueprint of where to start from.. now she can even assist other women",
-    photoUrl: "/brand/testimonials/ebai-doris.jpg",
+      "This workbook is too cheap compared to the benefits. Thanks you so much",
+    photoUrl: "/brand/testimonials/mba-destiny.jpg",
   },
 
 ];
