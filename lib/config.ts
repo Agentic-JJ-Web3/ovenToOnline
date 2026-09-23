@@ -4,7 +4,11 @@
 // is a build mistake, not a runtime one. Grep the client bundle for "sk_live"
 // before every deploy.
 
+// TODO: TEST PRICING — first 2 approved orders are 100 FCFA for a live
+// SebPay smoke test. Remove this tier (back to the plain 3-tier ladder
+// below) before any real ad spend.
 export const PRICE_TIERS = [
+  { upTo: 2, price: 100, label: "Test batch" },
   { upTo: 10, price: 2500, label: "Early bird" },
   { upTo: 15, price: 3000, label: "Second release" },
   { upTo: Infinity, price: 5000, label: "Standard" },
@@ -27,23 +31,22 @@ export function spotsLeftInTier(approvedCount: number): number | null {
 // ---------------------------------------------------------------------------
 // SebPay — confirmed operator/country values.
 //
-// PENDING: §0 pre-flight has not completed successfully yet (SebPay is
-// returning 403 IP_NOT_ALLOWED for this environment's outbound IP). Do not
-// fill this in with guessed slugs. Run the pre-flight curl calls in claude.md
-// §0 once the key's IP allowlist is fixed, then replace SEBPAY_CONFIRMED
-// below with the exact confirmed values and delete this comment block.
+// CONFIRMED 2026-09-23 via GET /api/v1/operators?country=CM and
+// GET /api/v1/countries (claude.md §0 pre-flight). CM -> XAF confirmed.
+//
+// The operators endpoint returns both a `slug` (e.g. "mtn-cm") and a `code`
+// (e.g. "mtn") per operator. POST /collections wants `code` — sending
+// `slug` fails with "Operator not found or not configured for this
+// country." (confirmed by a live 400 from a real checkout attempt).
 // ---------------------------------------------------------------------------
-export const SEBPAY_PREFLIGHT_CONFIRMED = false as boolean;
+export const SEBPAY_PREFLIGHT_CONFIRMED = true as boolean;
 
 export type SebpayOperator = {
-  slug: string;
+  code: string;
   label: string;
   otpRequired: boolean;
 };
 
-// Placeholder shape only — DO NOT use in production checkout logic until
-// SEBPAY_PREFLIGHT_CONFIRMED is true and these values were copied from a
-// real /api/v1/operators?country=CM response.
 export const SEBPAY_CONFIRMED: {
   country: "CM";
   currency: "XAF";
@@ -51,7 +54,10 @@ export const SEBPAY_CONFIRMED: {
 } = {
   country: "CM",
   currency: "XAF",
-  operators: [],
+  operators: [
+    { code: "mtn", label: "MTN MoMo", otpRequired: false },
+    { code: "orange", label: "Orange Money", otpRequired: false },
+  ],
 };
 
 export const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER ?? "237675455491";
