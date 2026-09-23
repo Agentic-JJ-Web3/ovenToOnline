@@ -39,7 +39,7 @@ export async function POST(request: Request) {
 
   const name = body.name?.trim();
   const email = body.email?.trim() || null;
-  const operatorSlug = body.operator?.trim();
+  const operatorCode = body.operator?.trim();
 
   if (!name) {
     return NextResponse.json({ error: "Enter your name." }, { status: 400 });
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const operator = SEBPAY_CONFIRMED.operators.find((op) => op.slug === operatorSlug);
+  const operator = SEBPAY_CONFIRMED.operators.find((op) => op.code === operatorCode);
   if (!operator) {
     return NextResponse.json({ error: "Choose MTN MoMo or Orange Money." }, { status: 400 });
   }
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
       buyer_name: name,
       buyer_phone: phone,
       buyer_email: email,
-      operator: operator.slug,
+      operator: operator.code,
       amount: tier.price,
       tier_label: tier.label,
       status: "pending",
@@ -115,7 +115,7 @@ export async function POST(request: Request) {
         amount: tier.price,
         currency: SEBPAY_CONFIRMED.currency,
         phone,
-        operator: operator.slug,
+        operator: operator.code,
         country: SEBPAY_CONFIRMED.country,
         external_reference: externalReference,
         callback_url: `${SITE_URL}/api/webhooks/sebpay`,
