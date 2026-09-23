@@ -13,7 +13,7 @@ import { CrustButton } from "@/components/CrustButton";
 import { formatPrice } from "@/lib/format";
 import { WHATSAPP_NUMBER } from "@/lib/config";
 
-type Operator = { slug: string; label: string; otpRequired: boolean };
+type Operator = { code: string; label: string; otpRequired: boolean };
 
 type TierInfo = {
   price: number;
@@ -59,7 +59,7 @@ function CheckoutModal({ onClose }: { onClose: () => void }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [operatorSlug, setOperatorSlug] = useState<string | null>(null);
+  const [operatorCode, setOperatorCode] = useState<string | null>(null);
   const [otp, setOtp] = useState("");
 
   const pollTimer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -70,7 +70,7 @@ function CheckoutModal({ onClose }: { onClose: () => void }) {
       .then((r) => r.json())
       .then((data) => {
         setTier(data);
-        if (data.operators?.length === 1) setOperatorSlug(data.operators[0].slug);
+        if (data.operators?.length === 1) setOperatorCode(data.operators[0].code);
       })
       .catch(() => setFormError("Could not load pricing. Refresh and try again."));
   }, []);
@@ -82,7 +82,7 @@ function CheckoutModal({ onClose }: { onClose: () => void }) {
     };
   }, []);
 
-  const operator = tier?.operators.find((op) => op.slug === operatorSlug) ?? null;
+  const operator = tier?.operators.find((op) => op.code === operatorCode) ?? null;
 
   const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     "Hi! I'd like to buy From Oven to Online."
@@ -93,8 +93,8 @@ function CheckoutModal({ onClose }: { onClose: () => void }) {
     setFormError(null);
 
     if (!name.trim()) return setFormError("Enter your name.");
-    if (!phone.trim()) return setFormError("Enter your Mobile Money number.");
-    if (!operatorSlug) return setFormError("Choose MTN MoMo or Orange Money.");
+    if (!phone.trim()) return setFormError("Enter the number you're paying with.");
+    if (!operatorCode) return setFormError("Choose MTN MoMo or Orange Money.");
     if (operator?.otpRequired && !otp.trim()) return setFormError("Enter the OTP code.");
 
     setSubmitting(true);
@@ -102,7 +102,7 @@ function CheckoutModal({ onClose }: { onClose: () => void }) {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email: email || undefined, operator: operatorSlug, otp: otp || undefined }),
+        body: JSON.stringify({ name, phone, email: email || undefined, operator: operatorCode, otp: otp || undefined }),
       });
       const data = await res.json();
 
@@ -208,7 +208,7 @@ function CheckoutModal({ onClose }: { onClose: () => void }) {
                 </label>
 
                 <label className="flex flex-col gap-1 text-sm text-ink">
-                  WhatsApp number
+                  The number you&apos;re paying with
                   <input
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
@@ -216,16 +216,19 @@ function CheckoutModal({ onClose }: { onClose: () => void }) {
                     className="rounded-lg border border-sand bg-white px-4 py-3 text-base outline-none focus:border-caramel"
                     placeholder="6XX XXX XXX"
                   />
+                  <span className="text-xs text-muted">
+                    The MTN MoMo or Orange Money number you&apos;ll approve the payment on — not necessarily your WhatsApp number.
+                  </span>
                 </label>
 
                 <div className="grid grid-cols-2 gap-3">
                   {tier.operators.map((op) => (
                     <button
                       type="button"
-                      key={op.slug}
-                      onClick={() => setOperatorSlug(op.slug)}
+                      key={op.code}
+                      onClick={() => setOperatorCode(op.code)}
                       className={`rounded-xl border-2 px-4 py-4 text-center font-display font-semibold transition ${
-                        operatorSlug === op.slug
+                        operatorCode === op.code
                           ? "border-caramel bg-caramel/10 text-caramel"
                           : "border-sand text-ink"
                       }`}
