@@ -23,21 +23,21 @@ const FAQS = [
 
 export function FAQ() {
   return (
-    <section className="bg-cream px-5 py-16">
+    <section className="bg-brown px-5 py-16">
       <div className="mx-auto max-w-2xl">
-        <p className="kicker text-caramel">Questions</p>
-        <h2 className="mt-3 font-display text-3xl font-semibold text-ink">
+        <p className="kicker text-gold">Questions</p>
+        <h2 className="mt-3 font-display text-3xl font-semibold text-cream">
           Before you buy
         </h2>
 
-        <div className="mt-8 flex flex-col divide-y divide-sand">
+        <div className="mt-8 flex flex-col divide-y divide-cream/15">
           {FAQS.map((item) => (
             <details key={item.q} className="group py-5">
-              <summary className="flex cursor-pointer list-none items-center justify-between font-display text-base font-semibold text-ink">
+              <summary className="flex cursor-pointer list-none items-center justify-between font-display text-base font-semibold text-cream">
                 {item.q}
-                <span className="ml-4 text-caramel group-open:rotate-45">+</span>
+                <span className="ml-4 text-gold group-open:rotate-45">+</span>
               </summary>
-              <p className="mt-3 text-[14px] leading-relaxed text-ink/75">
+              <p className="mt-3 text-[14px] leading-relaxed text-sand/85">
                 {item.a}
               </p>
             </details>
