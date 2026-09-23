@@ -8,26 +8,26 @@ export function FinalCTA() {
   )}`;
 
   return (
-    <section className="bg-brown px-5 py-20 text-center">
+    <section className="flour-speckle bg-cream px-5 py-20 text-center">
       <div className="mx-auto max-w-md">
-        <h2 className="font-display text-3xl font-semibold text-cream">
+        <h2 className="font-display text-3xl font-semibold text-ink">
           Your first 50 customers are already in your phone.
         </h2>
-        <p className="mt-3 text-[15px] text-sand">
+        <p className="mt-3 text-[15px] text-ink/75">
           They just don&apos;t know you&apos;re selling yet.
         </p>
 
         <div className="mt-8 flex justify-center">
-          <Counter variant="dark" />
+          <Counter variant="light" />
         </div>
 
         <div className="mt-8">
           <BuyButton>Get the workbook</BuyButton>
         </div>
 
-        <p className="mt-6 text-sm text-gold/80">
+        <p className="mt-6 text-sm text-muted">
           Questions first?{" "}
-          <a href={whatsappHref} className="underline">
+          <a href={whatsappHref} className="text-caramel underline">
             Message us on WhatsApp
           </a>
         </p>
