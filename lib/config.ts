@@ -55,8 +55,10 @@ export const SEBPAY_CONFIRMED: {
   country: "CM",
   currency: "XAF",
   operators: [
-    { code: "mtn", label: "MTN MoMo", otpRequired: false },
-    { code: "orange", label: "Orange Money", otpRequired: false },
+    // Case matches the live /api/v1/operators?country=CM response exactly
+    // (re-verified 2026-09-26) — never assume lowercase.
+    { code: "MTN", label: "MTN MoMo", otpRequired: false },
+    { code: "ORANGE", label: "Orange Money", otpRequired: false },
   ],
 };
 
