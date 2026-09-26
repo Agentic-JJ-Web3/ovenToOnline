@@ -4,11 +4,13 @@
 // is a build mistake, not a runtime one. Grep the client bundle for "sk_live"
 // before every deploy.
 
-// TODO: TEST PRICING — first 2 approved orders are 100 FCFA for a live
-// SebPay smoke test. Remove this tier (back to the plain 3-tier ladder
-// below) before any real ad spend.
+// TODO: TEST PRICING — first 2 approved orders are 300 FCFA for a live
+// SebPay smoke test (SebPay's minimum collection amount is 300 FCFA — a
+// 100 FCFA attempt stays stuck pending since it never clears that floor).
+// Remove this tier (back to the plain 3-tier ladder below) before any real
+// ad spend.
 export const PRICE_TIERS = [
-  { upTo: 2, price: 100, label: "Test batch" },
+  { upTo: 2, price: 300, label: "Test batch" },
   { upTo: 10, price: 2500, label: "Early bird" },
   { upTo: 15, price: 3000, label: "Second release" },
   { upTo: Infinity, price: 5000, label: "Standard" },
